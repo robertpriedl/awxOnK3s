@@ -34,7 +34,7 @@ sudo chmod 755 /data/postgres-13
 sudo chown 1000:0 /data/projects
 
 # Modify hostname in base/awx.yaml.
-sudo sed -e 's/.*hostname: awx.example.com.*/hostname: awx.pritec.solutions/' -i base/awx.yaml
+sudo sed -e 's/.*hostname: awx.example.com.*/  hostname: awx.pritec.solutions/' -i base/awx.yaml
 # ...
 #spec:
 #  ...
