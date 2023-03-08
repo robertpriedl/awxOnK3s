@@ -44,7 +44,7 @@ sudo sed -e "s/.*hostname: awx.example.com.*/  hostname: ${AWX_HOST}/" -i base/a
 #...
 #
 # create AWX Installation on K3s:
-# kubectl apply -k base
+kubectl apply -k base
 
 # check install progress (should be end if:
 # PLAY RECAP *********************************************************************
