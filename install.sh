@@ -3,7 +3,7 @@ sudo systemctl disable firewalld --now
 
 # Disable nm-cloud-setup if exists and enabled
 sudo systemctl disable nm-cloud-setup.service nm-cloud-setup.timer
-sudo reboot
+# sudo reboot
 
 sudo dnf install -y git make curl
 sudo apt install -y git make curl
