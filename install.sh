@@ -28,17 +28,13 @@ git checkout 1.2.0
 AWX_HOST="awx.pritec.solutions"
 openssl req -x509 -nodes -days 3650 -newkey rsa:2048 -out ./base/tls.crt -keyout ./base/tls.key -subj "/CN=${AWX_HOST}/O=${AWX_HOST}" -addext "subjectAltName = DNS:${AWX_HOST}"
 
-
-
-
-
 sudo mkdir -p /data/postgres-13
 sudo mkdir -p /data/projects
 sudo chmod 755 /data/postgres-13
 sudo chown 1000:0 /data/projects
 
 # Modify hostname in base/awx.yaml.
-
+sudo sed -e 's/.*hostname: awx.example.com.*/hostname: awx.pritec.solutions/' -i base/awx.yaml
 # ...
 #spec:
 #  ...
