@@ -5,25 +5,24 @@ sudo systemctl disable firewalld --now
 sudo systemctl disable nm-cloud-setup.service nm-cloud-setup.timer
 # sudo reboot
 
+# install centos or ubuntu
 sudo dnf install -y git make curl
 sudo apt install -y git make curl
 
 curl -sfL https://get.k3s.io | sh -s - --write-kubeconfig-mode 644
 
-cd ~
+# clone awx-operator with verison 1.2
 git clone https://github.com/ansible/awx-operator.git
-cd awx-operator
-git checkout 1.2.0
+(cd ~/awx-operator && git checkout 1.2.0)
 
 export NAMESPACE=awx
-make deploy
+(cd ~/awx-operator && make deploy)
 
 kubectl -n awx get all
 
-cd ~
-git clone https://github.com/kurokobo/awx-on-k3s.git
-cd awx-on-k3s
-git checkout 1.2.0
+# clone awx on k3s repo in version 1.2.0
+(cd ~ && git clone https://github.com/kurokobo/awx-on-k3s.git)
+(cd awx-on-k3s && git checkout 1.2.0)
 
 AWX_HOST="awx.pritec.solutions"
 openssl req -x509 -nodes -days 3650 -newkey rsa:2048 -out ./base/tls.crt -keyout ./base/tls.key -subj "/CN=${AWX_HOST}/O=${AWX_HOST}" -addext "subjectAltName = DNS:${AWX_HOST}"
@@ -33,7 +32,7 @@ sudo mkdir -p /data/projects
 sudo chmod 755 /data/postgres-13
 sudo chown 1000:0 /data/projects
 
-# Modify hostname in base/awx.yaml.
+# Modify hostname in base/awx.yaml. to call awx via hostname in broser - else there is a 404!
 sudo sed -e "s/.*hostname: awx.example.com.*/  hostname: ${AWX_HOST}/" -i base/awx.yaml
 # ...
 #spec:
