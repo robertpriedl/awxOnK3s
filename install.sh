@@ -45,13 +45,19 @@ sudo sed -e "s/.*hostname: awx.example.com.*/  hostname: ${AWX_HOST}/" -i ~/awx-
 # create AWX Installation on K3s:
 kubectl apply -k base
 
+# awx and postgres pods should be provisioned in new version
+# installation logs can be viewd in:
+echo "to get logs call:"
+echo "kubectl logs -f deployments/awx-operator-controller-manager -c awx-manager -n awx"
+echo "to get all pods call:"
+echo "kubectl -n awx get awx,all,ingress,secrets"
 # check install progress (should be end if:
 # PLAY RECAP *********************************************************************
 # localhost                  : ok=77   changed=0    unreachable=0    failed=0    skipped=71   rescued=0    ignored=1
-kubectl -n awx logs -f deployments/awx-operator-controller-manager
+# kubectl -n awx logs -f deployments/awx-operator-controller-manager
 
 # check pod status:
-kubectl -n awx get awx,all,ingress,secrets
+# kubectl -n awx get awx,all,ingress,secrets
 # should be:
 # NAME                      AGE
 # awx.awx.ansible.com/awx   13m
