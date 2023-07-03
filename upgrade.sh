@@ -5,7 +5,7 @@
 rm ~/awx-operator -r -f
 # clone actual awx-operator
 git clone https://github.com/ansible/awx-operator.git ~/awx-operator
-# cd awx-operator
+source ~/awx-operator
 
 # set namespace to awx
 kubectl config set-context --current --namespace=awx
@@ -22,7 +22,7 @@ kubectl delete role awx-operator-awx-manager-role -n awx
 
 # deploy new version of awx-operator
 export NAMESPACE=awx
-VERSION=latest make ~/awx-operator/deploy
+VERSION=latest make deploy
 
 # operator pod should be pulled and installed
 kubectl get pods -n awx
