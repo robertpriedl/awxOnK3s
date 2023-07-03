@@ -29,5 +29,6 @@ kubectl get pods -n awx
 
 # awx and postgres pods should be provisioned in new version
 # installation logs can be viewd in:
-kubectl logs -f deployments/awx-operator-controller-manager -c awx-manager -n awx
+echo "to get logs call:"
+echo "kubectl logs -f deployments/awx-operator-controller-manager -c awx-manager -n awx"
 
