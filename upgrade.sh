@@ -12,8 +12,8 @@ cd awx-operator
 kubectl config set-context --current --namespace=awx
 
 # install curl and jq
-sudo yum install epel-release
-sudo yum install curl jq
+sudo yum install epel-release -y
+sudo yum install curl jq -y
 
 # delete old awx container
 kubectl delete  deployment awx-operator-controller-manager
