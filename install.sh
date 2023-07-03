@@ -1,6 +1,7 @@
 # get awx hostname for ingress controller
 printf 'whats the dns hostname for the awx server (not fqdn - only hostname)'
 read awxHostname
+echo "AWX will be installed with name: $awxHostname.pritec.solutions"
 # Disable firewalld
 sudo systemctl disable firewalld --now
 
