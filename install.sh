@@ -29,7 +29,7 @@ kubectl -n awx get all
 (cd ~/awx-on-k3s && git checkout 1.2.0)
 
 AWX_HOST="$awxHostname.pritec.solutions"
-openssl req -x509 -nodes -days 3650 -newkey rsa:2048 -out ./base/tls.crt -keyout ./base/tls.key -subj "/CN=${AWX_HOST}/O=${AWX_HOST}" -addext "subjectAltName = DNS:${AWX_HOST}"
+openssl req -x509 -nodes -days 3650 -newkey rsa:2048 -out ~/awx-on-k3s/base/tls.crt -keyout ~/awx-on-k3s/base/tls.key -subj "/CN=${AWX_HOST}/O=${AWX_HOST}" -addext "subjectAltName = DNS:${AWX_HOST}"
 
 sudo mkdir -p /data/postgres-13
 sudo mkdir -p /data/projects
