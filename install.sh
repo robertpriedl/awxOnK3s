@@ -33,7 +33,7 @@ sudo chmod 755 /data/postgres-13
 sudo chown 1000:0 /data/projects
 
 # Modify hostname in base/awx.yaml. to call awx via hostname in broser - else there is a 404!
-sudo sed -e "s/.*hostname: awx.example.com.*/  hostname: ${AWX_HOST}/" -i base/awx.yaml
+sudo sed -e "s/.*hostname: awx.example.com.*/  hostname: ${AWX_HOST}/" -i ~/awx-on-k3s/base/awx.yaml
 # ...
 #spec:
 #  ...
