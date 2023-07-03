@@ -2,11 +2,10 @@
 # from https://computingforgeeks.com/how-to-upgrade-ansible-awx-running-in-kubernetes/?expand_article=1
 
 # change to home dir and remove old repo
-cd ~
-rm awx-operator -r -f
+rm ~/awx-operator -r -f
 # clone actual awx-operator
-git clone https://github.com/ansible/awx-operator.git
-cd awx-operator
+git clone https://github.com/ansible/awx-operator.git ~/awx-operator
+# cd awx-operator
 
 # set namespace to awx
 kubectl config set-context --current --namespace=awx
@@ -23,7 +22,7 @@ kubectl delete role awx-operator-awx-manager-role
 
 # deploy new version of awx-operator
 export NAMESPACE=awx
-VERSION=latest make deploy
+VERSION=latest make ~/awx-operator/deploy
 
 # operator pod should be pulled and installed
 kubectl get pods
