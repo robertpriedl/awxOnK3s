@@ -15,19 +15,19 @@ sudo yum install epel-release -y
 sudo yum install curl jq -y
 
 # delete old awx container
-kubectl delete  deployment awx-operator-controller-manager
-kubectl  delete serviceaccount awx-operator-controller-manager
-kubectl delete rolebinding awx-operator-awx-manager-rolebinding
-kubectl delete role awx-operator-awx-manager-role
+kubectl delete  deployment awx-operator-controller-manager -n awx
+kubectl  delete serviceaccount awx-operator-controller-manager -n awx
+kubectl delete rolebinding awx-operator-awx-manager-rolebinding -n awx
+kubectl delete role awx-operator-awx-manager-role -n awx
 
 # deploy new version of awx-operator
 export NAMESPACE=awx
 VERSION=latest make ~/awx-operator/deploy
 
 # operator pod should be pulled and installed
-kubectl get pods
+kubectl get pods -n awx
 
 # awx and postgres pods should be provisioned in new version
 # installation logs can be viewd in:
-kubectl logs -f deployments/awx-operator-controller-manager -c awx-manager
+kubectl logs -f deployments/awx-operator-controller-manager -c awx-manager -n awx
 
