@@ -1,3 +1,6 @@
+# get awx hostname for ingress controller
+printf 'whats the dns hostname for the awx server (not fqdn - only hostname)'
+read awxHostname
 # Disable firewalld
 sudo systemctl disable firewalld --now
 
@@ -24,7 +27,7 @@ kubectl -n awx get all
 (cd ~ && git clone https://github.com/kurokobo/awx-on-k3s.git)
 (cd awx-on-k3s && git checkout 1.2.0)
 
-AWX_HOST="awx.pritec.solutions"
+AWX_HOST="$awxHostname.pritec.solutions"
 openssl req -x509 -nodes -days 3650 -newkey rsa:2048 -out ./base/tls.crt -keyout ./base/tls.key -subj "/CN=${AWX_HOST}/O=${AWX_HOST}" -addext "subjectAltName = DNS:${AWX_HOST}"
 
 sudo mkdir -p /data/postgres-13
@@ -43,7 +46,7 @@ sudo sed -e "s/.*hostname: awx.example.com.*/  hostname: ${AWX_HOST}/" -i ~/awx-
 #...
 #
 # create AWX Installation on K3s:
-kubectl apply -k base
+(cd ~/awx-on-k3s && kubectl apply -k base)
 
 # awx and postgres pods should be provisioned in new version
 # installation logs can be viewd in:
