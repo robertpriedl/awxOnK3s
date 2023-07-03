@@ -12,7 +12,7 @@ sudo apt install -y git make curl
 curl -sfL https://get.k3s.io | sh -s - --write-kubeconfig-mode 644
 
 # clone awx-operator with verison 1.2
-git clone https://github.com/ansible/awx-operator.git
+git clone https://github.com/ansible/awx-operator.git ~/awx-operator
 (cd ~/awx-operator && git checkout 1.2.0)
 
 export NAMESPACE=awx
