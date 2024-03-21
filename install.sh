@@ -13,20 +13,23 @@ sudo systemctl disable nm-cloud-setup.service nm-cloud-setup.timer
 sudo dnf install -y git make curl
 sudo apt install -y git make curl
 
-curl -sfL https://get.k3s.io | sh -s - --write-kubeconfig-mode 644
+# curl -sfL https://get.k3s.io | sh -s - --write-kubeconfig-mode 644
+curl -sfL https://get.k3s.io | INSTALL_K3S_VERSION=v1.28.7+k3s1 sh -s - --write-kubeconfig-mode 644
 
 # clone awx-operator with verison 1.2
-git clone https://github.com/ansible/awx-operator.git ~/awx-operator
-(cd ~/awx-operator && git checkout devel)
+#git clone https://github.com/ansible/awx-operator.git ~/awx-operator
+#(cd ~/awx-operator && git checkout devel)
 
 export NAMESPACE=awx
 (cd ~/awx-operator && make deploy)
 
 kubectl -n awx get all
 
-# clone awx on k3s repo in version 1.2.0
+# clone awx on k3s repo in version 2.1.13
 (cd ~ && git clone https://github.com/kurokobo/awx-on-k3s.git)
-(cd ~/awx-on-k3s && git checkout main)
+(cd ~/awx-on-k3s && git checkout 2.13.1)
+
+kubectl apply -k operator
 
 AWX_HOST="$awxHostname.pritec.solutions"
 openssl req -x509 -nodes -days 3650 -newkey rsa:2048 -out ~/awx-on-k3s/base/tls.crt -keyout ~/awx-on-k3s/base/tls.key -subj "/CN=${AWX_HOST}/O=${AWX_HOST}" -addext "subjectAltName = DNS:${AWX_HOST}"
