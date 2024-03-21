@@ -34,10 +34,12 @@ kubectl apply -k operator
 AWX_HOST="$awxHostname.pritec.solutions"
 openssl req -x509 -nodes -days 3650 -newkey rsa:2048 -out ~/awx-on-k3s/base/tls.crt -keyout ~/awx-on-k3s/base/tls.key -subj "/CN=${AWX_HOST}/O=${AWX_HOST}" -addext "subjectAltName = DNS:${AWX_HOST}"
 
-sudo mkdir -p /data/postgres-15
+
+sudo mkdir -p /data/postgres-15/data
 sudo mkdir -p /data/projects
-sudo chmod 755 /data/postgres-15
+sudo chown 26:0 /data/postgres-15/data
 sudo chown 1000:0 /data/projects
+sudo chmod 700 /data/postgres-15/data
 
 # Modify hostname in base/awx.yaml. to call awx via hostname in broser - else there is a 404!
 sudo sed -e "s/.*hostname: awx.example.com.*/    - hostname: ${AWX_HOST}/" -i ~/awx-on-k3s/base/awx.yaml
