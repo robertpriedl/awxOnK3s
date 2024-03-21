@@ -26,7 +26,7 @@ kubectl -n awx get all
 
 # clone awx on k3s repo in version 1.2.0
 (cd ~ && git clone https://github.com/kurokobo/awx-on-k3s.git)
-(cd ~/awx-on-k3s && git checkout 1.2.0)
+(cd ~/awx-on-k3s && git checkout main)
 
 AWX_HOST="$awxHostname.pritec.solutions"
 openssl req -x509 -nodes -days 3650 -newkey rsa:2048 -out ~/awx-on-k3s/base/tls.crt -keyout ~/awx-on-k3s/base/tls.key -subj "/CN=${AWX_HOST}/O=${AWX_HOST}" -addext "subjectAltName = DNS:${AWX_HOST}"
