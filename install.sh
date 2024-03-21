@@ -21,7 +21,7 @@ curl -sfL https://get.k3s.io | INSTALL_K3S_VERSION=v1.28.7+k3s1 sh -s - --write-
 #(cd ~/awx-operator && git checkout devel)
 
 export NAMESPACE=awx
-(cd ~/awx-operator && make deploy)
+# (cd ~/awx-operator && make deploy)
 
 kubectl -n awx get all
 
