@@ -14,6 +14,15 @@ git clone https://github.com/ansible/awx-operator.git ~/awx-operator
 sudo yum install epel-release -y
 sudo yum install curl jq -y
 
+# if problems with authorize k3s for kubectl use certificate rotate:
+# Stop K3s:
+##systemctl stop k3s
+# Rotate certificates:
+##k3s certificate rotate
+# see: https://docs.k3s.io/cli/certificate
+
+# Start K3s
+systemctl start k3s
 # delete old awx container
 /usr/local/bin/kubectl delete deployment awx-operator-controller-manager -n awx
 /usr/local/bin/kubectl delete serviceaccount awx-operator-controller-manager -n awx
