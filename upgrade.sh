@@ -20,9 +20,8 @@ sudo yum install curl jq -y
 # Rotate certificates:
 ##k3s certificate rotate
 # see: https://docs.k3s.io/cli/certificate
-
 # Start K3s
-systemctl start k3s
+##systemctl start k3s
 # delete old awx container
 /usr/local/bin/kubectl delete deployment awx-operator-controller-manager -n awx
 /usr/local/bin/kubectl delete serviceaccount awx-operator-controller-manager -n awx
