@@ -17,7 +17,7 @@ curl -sfL https://get.k3s.io | sh -s - --write-kubeconfig-mode 644
 
 # clone awx-operator with verison 1.2
 git clone https://github.com/ansible/awx-operator.git ~/awx-operator
-(cd ~/awx-operator && git checkout latest)
+(cd ~/awx-operator && git checkout devel)
 
 export NAMESPACE=awx
 (cd ~/awx-operator && make deploy)
